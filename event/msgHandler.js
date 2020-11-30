@@ -33,7 +33,7 @@ const {
     rugapoi,
     rugaapi,
     cariKasar
-} = require('./../tools/index')
+} = require('../tools/index')
 
 const { 
     msgFilter, 
@@ -56,7 +56,7 @@ const {botName,
     memberLimit,
     groupLimit,
     prefix,
-    waFeed,} = require('./../setting/data/bot-setting.json')
+    waFeed,} = require('../setting/data/bot-setting.json')
 const style = require('../setting/console')
     
 
