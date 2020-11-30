@@ -1,0 +1,5 @@
+{
+    "git.ignoreLimitWarning": true,
+    "workbench.editor.enablePreview": false,
+    "compile-hero.disable-compile-files-on-did-save-code": false
+}

@@ -1,0 +1,19 @@
+{
+    "botName" : "R-Bot",
+    "botVersion" : "1.1",
+    "ownerNumber": "628985665498@c.us",
+    "numberWA" : "08985665498",
+    "memberLimit": 1,
+    
+    "groupLimit": 100,
+    "prefix": "#",
+
+    "waFeed" : "https://wa.me/628985665498?text=Feedback%20%3A%20",
+    "waProblem" : "https://wa.me/628985665498?text=Keluhan%20%3A%20",
+
+    "cacheMessage" : 300
+
+    
+
+}
+
