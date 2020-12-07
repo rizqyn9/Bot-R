@@ -1,5 +1,23 @@
 {
     "git.ignoreLimitWarning": true,
     "workbench.editor.enablePreview": false,
-    "compile-hero.disable-compile-files-on-did-save-code": false
+    "compile-hero.disable-compile-files-on-did-save-code": false,
+
+    "workbench.colorTheme": "Snazzy Operator",
+    "editor.fontFamily": "Operator Mono, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontSize": 14,
+    "editor.lineHeight": 20,
+    "editor.letterSpacing": 0.7,
+    "files.trimTrailingWhitespace": true,
+    "editor.fontWeight":"500",
+    "prettier.eslintIntegration": true,
+    "editor.cursorStyle": "line",
+    "editor.cursorWidth": 0,
+    "editor.cursorBlinking": "blink",
+    // Very important: Install this plugin: https://github.com/be5invis/vscode-custom-css
+    // you'll need to change this to an absolute path on your computer
+    "vscode_custom_css.imports": [
+        "/Volumes/Macintosh HD/Users/wesbos/.vscodestyles.css"
+    ],
+    "editor.renderWhitespace": "all"
 }

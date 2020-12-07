@@ -1,1 +1,27 @@
-{}
+{
+  "name": "bot-r",
+  "version": "1.1.0",
+  "description": "Bot by R-Dev",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rizqyn9/Bot-R.git"
+  },
+  "keywords": [
+    "R-Bot"
+  ],
+  "author": "Rizqy Prastya Ari Nugroho",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rizqyn9/Bot-R/issues"
+  },
+  "homepage": "https://github.com/rizqyn9/Bot-R#readme"
+}
