@@ -12,6 +12,5 @@ const infoFeedback = `Untuk feedback dan selengkapya tentang Bot ini, bisa hubun
 
 module.exports ={
     infoProblem,
-    infoFeedback,
-    error
+    infoFeedback
 }
