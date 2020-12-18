@@ -1,0 +1,14 @@
+{
+  "group": [
+    {
+      "id": "GrupID-1",
+      "list": [
+        {
+          "listid": "Example 1",
+          "isiList": []
+        }
+      ]
+    }
+  ],
+  "personal": []
+}

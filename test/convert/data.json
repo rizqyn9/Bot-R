@@ -1,0 +1,34 @@
+{
+  "tsel": [
+    {
+      "cv": "uang",
+      "nilai": 0.1
+    },
+    {
+      "cv": "im3",
+      "nilai": 0.1
+    },
+    {
+      "cv": "three",
+      "nilai": 0.1
+    }
+  ],
+  "im3": [
+    {
+      "cv": "uang",
+      "nilai": 0.1
+    },
+    {
+      "cv": "tsel",
+      "nilai": 0.1
+    },
+    {
+      "cv": "three",
+      "nilai": 0.1
+    },
+    {
+      "cv": "byu",
+      "nilai": 0.1
+    }
+  ]
+}

@@ -19,5 +19,28 @@
     "vscode_custom_css.imports": [
         "/Volumes/Macintosh HD/Users/wesbos/.vscodestyles.css"
     ],
-    "editor.renderWhitespace": "all"
+    "editor.renderWhitespace": "all",
+    "window.dialogStyle": "custom",
+    "workbench.colorCustomizations": {
+        todomd.tagForeground
+        todomd.contextForeground
+        todomd.projectForeground
+        todomd.invalidDueDateForeground
+        todomd.invalidDueDateBackground
+        todomd.notDueForeground
+        todomd.dueForeground
+        todomd.overdueForeground
+        todomd.tagDelimiterForeground
+        todomd.commentForeground
+        todomd.priorityAForeground
+        todomd.priorityBForeground
+        todomd.priorityCForeground
+        todomd.priorityDForeground
+        todomd.priorityEForeground
+        todomd.priorityFForeground
+        todomd.closestDueDateForeground
+        todomd.closestDueDateBackground
+        todomd.treeViewCompletedTaskIcon`
+    }
+
 }

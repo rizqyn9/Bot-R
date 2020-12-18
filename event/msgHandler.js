@@ -13,7 +13,7 @@ const db_group = new FileSync(appRoot+'/data/group.json')  //! GROUP DATA CACHE
 const db = low(db_group)
 db.defaults({ group: []}).write()
 
-const { 
+const {
     removeBackgroundFromImageBase64
 } = require('remove.bg')
 
@@ -21,12 +21,12 @@ const {
     exec
 } = require('child_process')
 
-const { 
-    menuId, 
-    cekResi, 
-    urlShortener, 
-    meme, 
-    translate, 
+const {
+    menuId,
+    cekResi,
+    urlShortener,
+    meme,
+    translate,
     getLocationData,
     images,
     resep,
@@ -35,10 +35,10 @@ const {
     cariKasar
 } = require('../tools/index')
 
-const { 
-    msgFilter, 
-    color, 
-    processTime, 
+const {
+    msgFilter,
+    color,
+    processTime,
     isUrl
 } = require('../utils')
 
@@ -58,7 +58,7 @@ const {botName,
     prefix,
     waFeed,} = require('../setting/data/bot-setting.json')
 const style = require('../setting/console')
-    
+
 
 const {
     apiNoBg,
@@ -83,6 +83,9 @@ const inArray = (needle, haystack) => {
     }
     return false;
 }
+
+// ! Convert
+const library = require('../test/convert/library')
 
 
 
@@ -112,7 +115,7 @@ module.exports = HandleMsg = async (RBot, message) => {
         const url = args.length !== 0 ? args[0] : ''
         const isQuotedImage = quotedMsg && quotedMsg.type === 'image'
 	    const isQuotedVideo = quotedMsg && quotedMsg.type === 'video'
-		
+
 		// [IDENTIFY]
 		const isOwnerBot = ownerNumber.includes(pengirim)
         const isBanned = banned.includes(pengirim)
@@ -134,7 +137,7 @@ module.exports = HandleMsg = async (RBot, message) => {
             return style.bot(`REQ : ${groupId}`)
         }
 
-        //! Owner Acc Req 
+        //! Owner Acc Req
         if (command == "acc" && isOwnerBot){
             const check = groupList.includes(args[0])
             if(args.length === 1){
@@ -184,21 +187,21 @@ module.exports = HandleMsg = async (RBot, message) => {
         }
 
             //! [BETA] Avoid Spam Message
-        if (isCmd && msgFilter.isFiltered(from) && !isGroupMsg) { 
-            return style.spamChat(formatTime,formatCommand,'from',pushname);    
+        if (isCmd && msgFilter.isFiltered(from) && !isGroupMsg) {
+            return style.spamChat(formatTime,formatCommand,'from',pushname);
         }
-        if (isCmd && msgFilter.isFiltered(from) && isGroupMsg) { 
-            return style.spamGroup(formatTime, formatCommand, 'from', pushname, 'in' ,groupName)    
+        if (isCmd && msgFilter.isFiltered(from) && isGroupMsg) {
+            return style.spamGroup(formatTime, formatCommand, 'from', pushname, 'in' ,groupName)
         }
             //! BadWord
-        if(!isCmd && isKasar && isGroupMsg) { 
+        if(!isCmd && isKasar && isGroupMsg) {
             style.badWord(formatTime, formatCommand, 'from' , pushname, 'in', groupName)
         }
             //! EXE
-        if (isCmd && !isGroupMsg) { 
+        if (isCmd && !isGroupMsg) {
             style.exeChat(formatTime,formatCommand,'from', pushname)
         }
-        if (isCmd && isGroupMsg) { 
+        if (isCmd && isGroupMsg) {
             style.exeGroup(formatTime, formatCommand,'from' , pushname, 'in', groupName)
         }
 
@@ -209,7 +212,7 @@ module.exports = HandleMsg = async (RBot, message) => {
         if (isBanned) {
             return style.banPerson(formatTime,formatCommand,'from', pushname)
         }
-        
+
 		//! COMMAND
         switch (command) {
         // Menu and TnC
@@ -519,7 +522,7 @@ module.exports = HandleMsg = async (RBot, message) => {
                       return array.slice(Math.max(array.length - n, 0));
                     };
                     ayat = last(args)
-                  } 
+                  }
                   pesan = ""
                   if(isNaN(ayat)) {
                     var responsih2 = await axios.get('https://raw.githubusercontent.com/ArugaZ/grabbed-results/main/islam/surah/'+nmr+'.json')
@@ -596,7 +599,7 @@ module.exports = HandleMsg = async (RBot, message) => {
 				await RBot.sendFileFromUrl(from, `${res.link}`, '', '', id)
 			})
             break
-			
+
 		//Primbon Menu
 		case 'artinama':
 			if (args.length == 0) return RBot.reply(from, `Untuk mengetahui arti nama seseorang\nketik ${prefix}artinama Namanya`, id)
@@ -612,7 +615,7 @@ module.exports = HandleMsg = async (RBot, message) => {
 				await RBot.sendFileFromUrl(from, `${res.link}`, '', `${res.text}`, id)
 			})
 			break
-			
+
         // Random Kata
         case 'fakta':
             fetch('https://raw.githubusercontent.com/ArugaZ/grabbed-results/main/random/faktaunix.txt')
@@ -700,7 +703,7 @@ module.exports = HandleMsg = async (RBot, message) => {
                 RBot.reply(from, `[✘] Maaf, ada yang error! Silahkan hubungi owner ${prefix}botowner`, id)
             })
             break
-        
+
         // Search Any
         case 'images':
             if (args.length == 0) return RBot.reply(from, `Untuk mencari gambar di pinterest\nketik: ${prefix}images [search]\ncontoh: ${prefix}images naruto`, id)
@@ -855,7 +858,7 @@ module.exports = HandleMsg = async (RBot, message) => {
 				RBot.reply(from, `Maaf format salah\n\nSilahkan kirim foto dengan caption ${prefix}whatanime\n\nAtau reply foto dengan caption ${prefix}whatanime`, id)
 			}
             break
-            
+
         // Other Command
         case 'resi':
             if (args.length !== 2) return RBot.reply(from, `Maaf, format pesan salah.\nSilahkan ketik pesan dengan ${prefix}resi <kurir> <no_resi>\n\nKurir yang tersedia:\njne, pos, tiki, wahana, jnt, rpx, sap, sicepat, pcp, jet, dse, first, ninja, lion, idl, rex`, id)
@@ -921,7 +924,7 @@ module.exports = HandleMsg = async (RBot, message) => {
 				await RBot.reply(from, `${res}`, id)
 			})
 			break
-		
+
 		//Fun Menu
 		case 'klasmen':
 			if (!isGroupMsg) return RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id)
@@ -1035,12 +1038,12 @@ module.exports = HandleMsg = async (RBot, message) => {
 			if (args.length !== 1) return RBot.reply(from, `Untuk mengaktifkan Fitur Kata Kasar pada Group Chat\n\nApasih kegunaan Fitur Ini? Apabila seseorang mengucapkan kata kasar akan mendapatkan denda\n\nPenggunaan\n${prefix}kasar on --mengaktifkan\n${prefix}kasar off --nonaktifkan\n\n${prefix}reset --reset jumlah denda`, id)
 			if (args[0] == 'on') {
 				ngegas.push(chatId)
-				fs.writeFileSync('./settings/ngegas.json', JSON.stringify(ngegas))
+				fs.writeFileSync('./data/kasar.json', JSON.stringify(ngegas))
 				RBot.reply(from, 'Fitur Anti Kasar sudah di Aktifkan', id)
 			} else if (args[0] == 'off') {
 				let nixx = ngegas.indexOf(chatId)
 				ngegas.splice(nixx, 1)
-				fs.writeFileSync('./settings/ngegas.json', JSON.stringify(ngegas))
+				fs.writeFileSync('./data/kasar.json', JSON.stringify(ngegas))
 				RBot.reply(from, 'Fitur Anti Kasar sudah di non-Aktifkan', id)
 			} else {
 				RBot.reply(from, `Untuk mengaktifkan Fitur Kata Kasar pada Group Chat\n\napasih itu? fitur apabila seseorang mengucapkan kata kasar akan mendapatkan denda\n\nPenggunaan\n${prefix}kasar on --mengaktifkan\n${prefix}kasar off --nonaktifkan\n\n${prefix}reset --reset jumlah denda`, id)
@@ -1054,7 +1057,7 @@ module.exports = HandleMsg = async (RBot, message) => {
 				await RBot.sendText(from, "Klasemen telah direset.")
             }
 			break
-			
+
         //Owner Group
         case 'kickall': //mengeluarkan semua member
         if (!isGroupMsg) return RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id)
@@ -1125,10 +1128,20 @@ module.exports = HandleMsg = async (RBot, message) => {
             }
             RBot.reply(from, '✅ Clear all chat, Success!', id)
             break
+        // ! Convert
+        // ANCHOR
+        case 'cvsell' :
+            const datacv = arg
+            if(args.length > 0){
+                RBot.sendText(from,library.text(command, datacv))
+            }else{
+                RBot.sendText(from, `Kirim dengan format contoh #cvsell dana | 0898863484 | 1000000 | dana | 034834234234 | Rizqy`)
+            }
+            break
         default:
             break
         }
-		
+
 		// Simi-simi function
 		if ((!isCmd && isGroupMsg && isSimi) && message.type === 'chat') {
 			axios.get(`https://arugaz.herokuapp.com/api/simisimi?kata=${encodeURIComponent(message.body)}&apikey=${apiSimi}`)
@@ -1140,7 +1153,7 @@ module.exports = HandleMsg = async (RBot, message) => {
 				RBot.reply(from, `${err}`, id)
 			})
 		}
-		
+
 		// Kata kasar function
 		if(!isCmd && isGroupMsg && isNgegas) {
             const find = db.get('group').find({ id: groupId }).value()
