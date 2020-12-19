@@ -9,3 +9,29 @@
 
 @FIXING Gift sticker
 @FIXING Add Tag All
+
+〘
+〙
+↦
+⋘ ⋙
+
+↳
+
+[⏳]
+
+╔
+╠
+╚
+
+✘
+☑
+
+[✘]
+╞
+
+╔
+║
+╠
+╚
+
+➵ *${prefix}ISI*

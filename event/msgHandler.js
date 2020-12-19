@@ -1083,18 +1083,18 @@ module.exports = HandleMsg = async (RBot, message) => {
             if (args.length == 0) return RBot.reply(from, `Format : ban @tag +1 (GROUP), ban numTarget (Personal)`, id)
             if (args[0] == 'add') {
                 banned.push(args[1]+'@c.us')
-                fs.writeFileSync('./settings/banned.json', JSON.stringify(banned))
+                fs.writeFileSync('./data/banned.json', JSON.stringify(banned))
                 RBot.reply(from, '✅ Success banned target!')
             } else
             if (args[0] == 'del') {
                 let xnxx = banned.indexOf(args[1]+'@c.us')
                 banned.splice(xnxx,1)
-                fs.writeFileSync('./settings/banned.json', JSON.stringify(banned))
+                fs.writeFileSync('./data/banned.json', JSON.stringify(banned))
                 RBot.reply(from, '✅ Success unbanned target!')
             } else {
              for (let i = 0; i < mentionedJidList.length; i++) {
                 banned.push(mentionedJidList[i])
-                fs.writeFileSync('./settings/banned.json', JSON.stringify(banned))
+                fs.writeFileSync('./data/banned.json', JSON.stringify(banned))
                 RBot.reply(from, '✅ Success ban target!', id)
                 }
             }
