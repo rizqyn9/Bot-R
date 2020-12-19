@@ -323,6 +323,8 @@ module.exports = HandleMsg = async (RBot, message) => {
             break
         case 'stickergif':
         case 'stikergif':
+        case 'gifsticker':
+        case 'gifstiker':
             if (isMedia || isQuotedVideo) {
                 if (mimetype === 'video/mp4' && message.duration < 10 || mimetype === 'image/gif' && message.duration < 10) {
                     var mediaData = await decryptMedia(message, uaOverride)
@@ -927,7 +929,7 @@ module.exports = HandleMsg = async (RBot, message) => {
 
 		//Fun Menu
 		case 'klasmen':
-			if (!isGroupMsg) return RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id)
+			if (!isGroupMsg) return RBot.reply(from, 'Perintah ini hanya dapat dilakukan dalam grup!', id)
 			const klasemen = db.get('group').filter({id: groupId}).map('members').value()[0]
             let urut = Object.entries(klasemen).map(([key, val]) => ({id: key, ...val})).sort((a, b) => b.denda - a.denda);
             let textKlas = "*Klasemen Denda Sementara*\n"
@@ -941,7 +943,7 @@ module.exports = HandleMsg = async (RBot, message) => {
 
         // Group Commands (group admin only)
 	    case 'add':
-            if (!isGroupMsg) return RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id)
+            if (!isGroupMsg) return RBot.reply(from, 'Perintah ini hanya dapat dilakukan dalam grup!', id)
             if (!isGroupAdmins) return RBot.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id)
             if (!isBotGroupAdmins) return RBot.reply(from, 'Gagal, silahkan tambahkan bot sebagai admin grup!', id)
 	        if (args.length !== 1) return RBot.reply(from, `Untuk menggunakan ${prefix}add\nPenggunaan: ${prefix}add <nomor>\ncontoh: ${prefix}add 628xxx`, id)
@@ -952,7 +954,7 @@ module.exports = HandleMsg = async (RBot, message) => {
                 }
             break
         case 'kick':
-            if (!isGroupMsg) return RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id)
+            if (!isGroupMsg) return RBot.reply(from, 'Perintah ini hanya dapat dilakukan dalam grup!', id)
             if (!isGroupAdmins) return RBot.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id)
             if (!isBotGroupAdmins) return RBot.reply(from, 'Gagal, silahkan tambahkan bot sebagai admin grup!', id)
             if (mentionedJidList.length === 0) return RBot.reply(from, 'Maaf, format pesan salah.\nSilahkan tag satu atau lebih orang yang akan dikeluarkan', id)
@@ -964,7 +966,7 @@ module.exports = HandleMsg = async (RBot, message) => {
             }
             break
         case 'promote':
-            if (!isGroupMsg) return RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id)
+            if (!isGroupMsg) return RBot.reply(from, 'Perintah ini hanya dapat dilakukan dalam grup!', id)
             if (!isGroupAdmins) return RBot.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id)
             if (!isBotGroupAdmins) return RBot.reply(from, 'Gagal, silahkan tambahkan bot sebagai admin grup!', id)
             if (mentionedJidList.length !== 1) return RBot.reply(from, 'Maaf, hanya bisa mempromote 1 user', id)
@@ -974,7 +976,7 @@ module.exports = HandleMsg = async (RBot, message) => {
             await RBot.sendTextWithMentions(from, `Request diterima, menambahkan @${mentionedJidList[0].replace('@c.us', '')} sebagai admin.`)
             break
         case 'demote':
-            if (!isGroupMsg) return RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id)
+            if (!isGroupMsg) return RBot.reply(from, 'Perintah ini hanya dapat dilakukan dalam grup!', id)
             if (!isGroupAdmins) return RBot.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id)
             if (!isBotGroupAdmins) return RBot.reply(from, 'Gagal, silahkan tambahkan bot sebagai admin grup!', id)
             if (mentionedJidList.length !== 1) return RBot.reply(from, 'Maaf, hanya bisa mendemote 1 user', id)
@@ -984,7 +986,7 @@ module.exports = HandleMsg = async (RBot, message) => {
             await RBot.sendTextWithMentions(from, `Request diterima, menghapus jabatan @${mentionedJidList[0].replace('@c.us', '')}.`)
             break
         case 'bye':
-            if (!isGroupMsg) return RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id)
+            if (!isGroupMsg) return RBot.reply(from, 'Perintah ini hanya dapat dilakukan dalam grup!', id)
             if (!isGroupAdmins) return RBot.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id)
             RBot.sendText(from, 'Good bye... ( ⇀‸↼‶ )').then(() => RBot.leaveGroup(groupId))
             break
@@ -996,23 +998,23 @@ module.exports = HandleMsg = async (RBot, message) => {
             break
         case 'tagall':
         case 'everyone':
-            if (!isGroupMsg) return RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id)
+            if (!isGroupMsg) return RBot.reply(from, 'Perintah ini hanya dapat dilakukan dalam grup!', id)
             if (!isGroupAdmins) return RBot.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id)
             const groupMem = await RBot.getGroupMembers(groupId)
-            let hehex = '╔══✪〘 Mention All 〙✪══\n'
+            let hehex = `╔ ⋘⋙ *Hi ${groupName}* ⋘⋙\n`
             for (let i = 0; i < groupMem.length; i++) {
-                hehex += '╠➥'
+                hehex += '╠'
                 hehex += ` @${groupMem[i].id.replace(/@c.us/g, '')}\n`
             }
-            hehex += '╚═〘 *A R U G A  B O T* 〙'
+            hehex += '╚ ⋙ *R - B O T* ⋘ '
             await RBot.sendTextWithMentions(from, hehex)
             break
 		case 'simisimi':
-			if (!isGroupMsg) return RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id)
+			if (!isGroupMsg) return RBot.reply(from, 'Perintah ini hanya dapat dilakukan dalam grup!', id)
 			RBot.reply(from, `Untuk mengaktifkan simi-simi pada Group Chat\n\nPenggunaan\n${prefix}simi on --mengaktifkan\n${prefix}simi off --nonaktifkan\n`, id)
 			break
 		case 'simi':
-			if (!isGroupMsg) return RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id)
+			if (!isGroupMsg) return RBot.reply(from, 'Perintah ini hanya dapat dilakukan dalam grup!', id)
             if (!isGroupAdmins) return RBot.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id)
 			if (args.length !== 1) return RBot.reply(from, `Untuk mengaktifkan simi-simi pada Group Chat\n\nPenggunaan\n${prefix}simi on --mengaktifkan\n${prefix}simi off --nonaktifkan\n`, id)
 			if (args[0] == 'on') {
@@ -1029,11 +1031,11 @@ module.exports = HandleMsg = async (RBot, message) => {
 			}
 			break
 		case 'katakasar':
-			if (!isGroupMsg) return RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id)
+			if (!isGroupMsg) return RBot.reply(from, 'Perintah ini hanya dapat dilakukan dalam grup!', id)
 			RBot.reply(from, `Untuk mengaktifkan Fitur Kata Kasar pada Group Chat\n\nApasih kegunaan Fitur Ini? Apabila seseorang mengucapkan kata kasar akan mendapatkan denda\n\nPenggunaan\n${prefix}kasar on --mengaktifkan\n${prefix}kasar off --nonaktifkan\n\n${prefix}reset --reset jumlah denda`, id)
 			break
 		case 'kasar':
-			if (!isGroupMsg) return RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id)
+			if (!isGroupMsg) return RBot.reply(from, 'Perintah ini hanya dapat dilakukan dalam grup!', id)
             if (!isGroupAdmins) return RBot.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id)
 			if (args.length !== 1) return RBot.reply(from, `Untuk mengaktifkan Fitur Kata Kasar pada Group Chat\n\nApasih kegunaan Fitur Ini? Apabila seseorang mengucapkan kata kasar akan mendapatkan denda\n\nPenggunaan\n${prefix}kasar on --mengaktifkan\n${prefix}kasar off --nonaktifkan\n\n${prefix}reset --reset jumlah denda`, id)
 			if (args[0] == 'on') {
@@ -1050,7 +1052,7 @@ module.exports = HandleMsg = async (RBot, message) => {
 			}
 			break
 		case 'reset':
-			if (!isGroupMsg) return RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id)
+			if (!isGroupMsg) return RBot.reply(from, 'Perintah ini hanya dapat dilakukan dalam grup!', id)
             if (!isGroupAdmins) return RBot.reply(from, 'Gagal, perintah ini hanya dapat digunakan oleh admin grup!', id)
 			const reset = db.get('group').find({ id: groupId }).assign({ members: []}).write()
             if(reset){
@@ -1060,7 +1062,7 @@ module.exports = HandleMsg = async (RBot, message) => {
 
         //Owner Group
         case 'kickall': //mengeluarkan semua member
-        if (!isGroupMsg) return RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai didalam grup!', id)
+        if (!isGroupMsg) return RBot.reply(from, 'Perintah ini hanya dapat dilakukan dalam grup!', id)
         let isOwner = chat.groupMetadata.owner == pengirim
         if (!isOwner) return RBot.reply(from, 'Maaf, perintah ini hanya dapat dipakai oleh owner grup!', id)
         if (!isBotGroupAdmins) return RBot.reply(from, 'Gagal, silahkan tambahkan bot sebagai admin grup!', id)

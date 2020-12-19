@@ -5,3 +5,7 @@
 
 
 (C) Make Convert Logic
+
+
+@FIXING Gift sticker
+@FIXING Add Tag All
