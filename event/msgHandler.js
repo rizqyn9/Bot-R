@@ -32,7 +32,8 @@ const {
     resep,
     rugapoi,
     rugaapi,
-    cariKasar
+    cariKasar,
+    api
 } = require('../tools/index')
 
 const {
@@ -87,6 +88,9 @@ const inArray = (needle, haystack) => {
 // ! Convert
 const library = require('../test/convert/library')
 
+// ! Tiktok
+const linkTiktok= require('./../data/penyegar.json')
+
 
 
 module.exports = HandleMsg = async (RBot, message) => {
@@ -114,7 +118,8 @@ module.exports = HandleMsg = async (RBot, message) => {
         const uaOverride = process.env.UserAgent
         const url = args.length !== 0 ? args[0] : ''
         const isQuotedImage = quotedMsg && quotedMsg.type === 'image'
-	    const isQuotedVideo = quotedMsg && quotedMsg.type === 'video'
+        const isQuotedVideo = quotedMsg && quotedMsg.type === 'video'
+        const isQuotedMsg = quotedMsg && quotedMsg.type =='chat'
 
 		// [IDENTIFY]
 		const isOwnerBot = ownerNumber.includes(pengirim)
@@ -213,9 +218,16 @@ module.exports = HandleMsg = async (RBot, message) => {
             return style.banPerson(formatTime,formatCommand,'from', pushname)
         }
 
+
 		//! COMMAND
         switch (command) {
         // Menu and TnC
+        case 'asupan' :
+        case 'penyegar' :
+            let targetLink = Math.floor(Math.random()*linkTiktok.length)
+            let randomLink = linkTiktok[targetLink]
+            await RBot.sendFileFromUrl(from,`${randomLink}`,'','Berhasil',id)
+            break
         case 'speed':
         case 'ping':
         case 'tes':
@@ -412,6 +424,27 @@ module.exports = HandleMsg = async (RBot, message) => {
                 RBot.reply(from, `Ketik ${prefix}quotemaker |<isi_quote>|<author>|\n\ncontoh: ${prefix}quotemaker |aku sayang kamu|-R-Bot|`)
             }
             break
+        case 'quoteit':
+        case 'quotes':
+            console.log('quotes');
+            console.log(isQuotedMsg);
+            if(args.length === 0){
+                RBot.reply(from, '[⏳] Sedang di proses', id)
+                const quotes = `${quotedMsg}`
+                const author = ' '
+                const theme = "random"
+                try{
+                    const hasilQuotetIt = await images.quote(quotes,author,theme)
+                    RBot.sendFileFromUrl(from,`${hasilQuotetIt}`,'','↳ Sukses dibuat', id)
+                } catch {
+                    RBot.reply('[✘] Body Parse Error Sorry, R-Bot [BETA]', id)
+                }
+            }else{
+                RBot.reply(from,'[✘] Reply pesan dengan perintah *#quoteit*')
+            }
+            console.log("lewat");
+
+        break
 
             //! Turn OFF THIS FEATURE
         case 'nulis':
@@ -1140,6 +1173,28 @@ module.exports = HandleMsg = async (RBot, message) => {
                 RBot.sendText(from, `Kirim dengan format contoh #cvsell dana | 0898863484 | 1000000 | dana | 034834234234 | Rizqy`)
             }
             break
+        // ! Build
+        case 'ighl' :
+            let splited = arg.split(' ')
+            let user = splited[0]
+            let hl = splited[1]
+            let hl_select = splited[2]
+            if(user && hl && hl_select){
+                api.ig_highlight(user,hl,hl_select).then(res)
+            }else{
+                RBot.sendText(from,"Wrong Format")
+            }
+            break
+        case 'tiktok' :
+            if(args.length == 0) return RBot.reply(from,`Download video tiktok tanpa watermark. \nContoh : ${prefix}tiktok https://vt.tiktok.com/ZSKUv8Tf/`)
+            api.tiktok(args)
+            .then(async (res) => {
+                console.log(res)
+                await RBot.sendFileFromUrl(from,`${res.result.mp4direct}`,'',`↳ ☑ Sukses\nTiktok : ${res.result.nameInfo}`)
+                .catch(() => {
+					RBot.reply(from, `[✘] Tidak dapat mengambil target`, id)
+				})
+            })
         default:
             break
         }

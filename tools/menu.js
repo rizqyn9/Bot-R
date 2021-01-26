@@ -30,16 +30,16 @@ exports.textMenu = (pushname) => {
     return `
     Hai ${pushname} 🙌!
 Selamat menggunakan *${botName}* v${botVersion} dari R-Dev 🥳
-
 Donasi jika RDP mati
-Open jasa pembuatan Bot WA : ${numberWA}
-JASA = [*NOT FREE*]
 
 Kirim perintah dibawah ini untuk menggunakan bot ini :
 
 Sticker creator :
     ➵ *${prefix}sticker*
     ➵ *${prefix}stickergif*
+
+Downloader :
+    ➵ *${prefix}tiktok*
 
 Muslim : (Thanks Ican Bachors)
     ➵ *${prefix}jsolat*
@@ -59,7 +59,10 @@ Tentang Bot:
     ➵ *${prefix}changelog*
 
 Jangan lupa react dan donasi ya sob,
-    *${prefix}donasi*
+    ➵ *${prefix}donasi*
+
+Open jasa pembuatan Bot WA : ${numberWA}
+JASA = [*NOT FREE*]
 
     Terimakasih `
 }
@@ -85,13 +88,10 @@ exports.textAdmin = () => {
 
 exports.textDonasi = () => {
     return `
-    Terimakasih telah menggunakan bot ini, jika RDP mati maka bot tidak dapat digunakan, support developer sewa RDP mahal sob :(
+    Terimakasih telah menggunakan bot ini, jika RDP mati maka bot tidak dapat digunakan, support developer untuk biaya RDP :(
 
 Direct Donasi :
-OVO \t08985665498
-Dana \t08985665498
-GoPay \t08985665498
-Link Aja \t08985665498
+OVO, Dana, Gopay, Link Aja \t: 08985665498
 
 Donasi yang masuk akan digunakan untuk pengembangan dan pengoperasian R-Bot.
     Terimakasih  -  *Rizqy as DEV*`
@@ -100,9 +100,8 @@ Donasi yang masuk akan digunakan untuk pengembangan dan pengoperasian R-Bot.
 exports.textChangeLog = () => {
     return `
     Update ${botName} V.${botVersion}
-    [NEW] Tag all members feature in group menu
+    [NEW] Add tiktok downloader bypass watermark
 
-    Thanks for Al-Qur'an API from : Ican Bachors (Github)
     *~ R-DEV*
     `
 }

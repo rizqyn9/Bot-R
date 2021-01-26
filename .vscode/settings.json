@@ -4,7 +4,7 @@
     "compile-hero.disable-compile-files-on-did-save-code": false,
 
     // "workbench.colorTheme": "Snazzy Operator",
-    "editor.fontFamily": "Operator Mono, Menlo, Monaco, 'Courier New', monospace",
+    // "editor.fontFamily": "Operator Mono, Menlo, Monaco, 'Courier New', monospace",
     "editor.fontSize": 14,
     "editor.lineHeight": 20,
     "editor.letterSpacing": 0.7,
